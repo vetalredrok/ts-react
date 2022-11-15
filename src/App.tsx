@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {FC} from 'react';
+import {Navigate, Route, Routes} from "react-router-dom";
+import {MainLayout} from "./layouts";
+import {CarDetailsPage, CarPage} from "./pages";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App:FC = () => {
+    return (
+        <Routes>
+          <Route path={''} element={<MainLayout/>}/>
+            <Route index element={<Navigate to={'cars'}/>}/>
+            <Route path={'cars'} element={<CarPage/>}>
+                <Route path={':id'} element={<CarDetailsPage/>}/>
+            </Route>
+        </Routes>
+    );
+};
 
-export default App;
+export {App};
